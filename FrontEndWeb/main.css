@@ -1,0 +1,660 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+  ========================================
+  Custom styles
+  ========================================
+*/
+
+body {
+  background: #198090;
+  color: #888;
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*
+  ========================================
+  Grid
+  ========================================
+*/
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.container,
+.grid {
+  margin: 0 auto;
+  width: 960px;
+}
+.container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.grid,
+.col-1-3,
+.col-2-3 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.col-1-3,
+.col-2-3  {
+  display: inline-block;
+  vertical-align: top;
+}
+.col-1-3 {
+  width: 33.33%;
+}
+.col-2-3 {
+  width: 66.66%;
+}
+
+/*
+  ========================================
+  Clearfix
+  ========================================
+*/
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+/*
+  ========================================
+  Rows
+  ========================================
+*/
+
+.row,
+.row-alt, row-trans {
+  min-width: 960px;
+}
+.row {
+  background: #fff;
+  padding: 66px 0 44px 0;
+}
+.row-alt {
+  background: #fff;
+  background: -webkit-linear-gradient(to right, #a1d3b0, #f6f1d3);
+  background:    -moz-linear-gradient(to right, #a1d3b0, #f6f1d3);
+  background:         linear-gradient(to right, #fff, #51A2B5);
+  padding: 44px 0 22px 0;
+}
+.row-trans {
+  background: linear-gradient(#51A2B5, #198090);
+}
+
+/*
+  ========================================
+  Typography
+  ========================================
+*/
+
+h1, h2, h3, h4 {
+  color: #FECD34;
+}
+h1, h3, h4, h5, p {
+  margin-bottom: 22px;
+}
+h1 {
+  font-size: 36px;
+  line-height: 44px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 44px;
+}
+h3 {
+  font-size: 21px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  color: #a9b2b9;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+strong {
+  font-weight: 400;
+}
+cite,
+em {
+  font-style: italic;
+}
+
+/*
+  ========================================
+  Sign Up
+  ========================================
+*/
+
+.signup-container {
+  color: #fff;
+  font-size: 15px;
+  padding-bottom: 40px;
+}
+.signup-container h1 {
+    color: #fff;
+    font-weight: 300;
+    float:left;
+    margin-top: 15%;
+    margin-left: 45%;
+    
+}
+.signup-container p {
+  font-size: 21px;
+  line-height: 33px;
+}
+
+.signup-form-container {
+    display: table;
+    float: right;
+    width: 33%;
+}
+
+.signup-button {
+    background: #FECD34;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-bottom: 15px;
+    width: 33%;
+}
+
+.signup-button:hover {
+    border: 1px solid #51A2B5;
+}
+
+/*
+  ========================================
+  Links
+  ========================================
+*/
+
+.signout:hover {
+    color: white;
+}
+a {
+  color: #648880;
+  text-decoration: none;
+}
+a:hover {
+  color: #a9b2b9;
+}
+p a {
+  border-bottom: 1px solid #dfe2e5;
+}
+.primary-footer a {
+    color: #fff;
+}
+
+.primary-footer a:hover {
+  color: black;
+}
+
+/*
+  ========================================
+  Buttons
+  ========================================
+*/
+
+.btn {
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: .5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+.btn-alt {
+  border: 1px solid #fff;
+  padding: 10px 30px;
+}
+.btn-alt:hover {
+  background: #fff;
+  color: #198090;
+}
+
+.button {
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #198090;
+  border-radius: 5px;
+  color: #FECD34;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: .5px;
+  margin: 10px;
+  text-transform: uppercase;
+  border: 1px solid #fff;
+  padding: 10px 30px;
+}
+.button:hover {
+  background: #fff;
+  color: #198090;
+}
+
+.input-search {   
+    background: #198090;
+    width: 33%;
+    font: 600 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border: 2px solid black;
+    border-radius: 5px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    text-align: center;
+    background: #fff;
+    margin: 10px;
+    padding: 10px 30px;
+    outline: none;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.6s ease-in-out;
+    }
+    
+.input-search:focus {
+        width: 66%;
+        
+    }
+
+/*
+  ========================================
+  Primary header
+  ========================================
+*/
+
+.header-container {
+    background: #51A2B5;
+    width: 100%;
+}
+.primary-header {
+    background: #51A2B5;
+}
+
+.signout {
+    margin-top: 90px;
+    float: right;
+}
+
+.primary-header img {
+    float: left;
+    width: 100px;
+    height: auto;
+    padding-top: 15px;
+}
+.logo {
+  float: left;
+  font-size: 48px;
+  font-weight: 100;
+  letter-spacing: .5px;
+  line-height: 44px;
+  padding: 45px 0 22px 0;
+  text-transform: uppercase;
+}
+.tagline {
+  margin: 35px 0 10px 0;
+  text-align: right;
+}
+.primary-nav {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.login-container {
+  float: right;
+  padding: 0 20px;
+}
+
+/*
+  ========================================
+  Primary footer
+  ========================================
+*/
+
+.footer-container {
+    background: #198090;
+    width: 100%;
+}
+
+.primary-footer {
+  background: #198090;
+  color: #ECECEC;
+  font-size: 14px;
+  padding-bottom: 44px;
+  padding-top: 44px;
+}
+.primary-footer small {
+  float: left;
+  font-weight: 400;
+  
+}
+
+.primary-footer img {
+    float: left;
+    width: 75px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/*
+  ========================================
+  Navigation
+  ========================================
+*/
+
+.nav {
+  text-align: right;
+  
+}
+
+/*
+  ========================================
+  Home
+  ========================================
+*/
+
+.hero {
+  color: #fff;
+  line-height: 44px;
+  padding: 22px 80px 66px 80px;
+  text-align: center;
+}
+.hero h2 {
+  font-size: 36px;
+}
+.hero p {
+  font-size: 24px;
+  font-weight: 100;
+}
+
+/*
+  ========================================
+  Main Working Page Styles
+  ========================================
+*/
+
+
+}
+
+.button-container {
+    margin-top: 30px;
+}
+
+
+
+
+/*
+  ========================================
+  Forms
+  ========================================
+*/
+
+.input-login { 
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px;
+    margin: 2px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.signup-input {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px;
+    margin: 2px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+.login-button {
+    background: #FECD34;
+    font-weight: 700;
+    cursor: pointer;
+    float: right;
+    margin: 5px 3px;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.signup-button, {
+    background: #FECD34;
+    font-weight: 700;
+    cursor: pointer;
+    float: right;
+    margin: 10px 3px;
+    border-radius: 5px;
+    width: 40%;
+}
+
+.search-button {
+    font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: black;
+    text-transform: uppercase;
+    background: #FECD34;
+    font-weight: 400;
+    display: inline-block;
+    letter-spacing: .5px;
+    cursor: pointer;
+    margin: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    width: 33%;
+    padding: 10px 30px;
+}
+
+.search-button:hover {
+    border: 1px solid #198090;
+}
+
+.login-button:hover,
+.signup-button:hover {
+    border: 1px solid #198090;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 160px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    display: inline-block;
+    position: relative;
+    background-color: #198090;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #FECF34;
+    width: 25%;
+    text-align: left;
+    
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #198090;
+}
+
+.modal-body {
+    font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 15px;
+    width: 100%;
+}
+
+.modal-footer {
+    padding: 15px;
+    background-color: #198090;
+}
+
+.modal-input-button, .input-button {
+    background: #FECD34;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 43%;
+    margin-bottom: 15px;
+}
+
+.modal-input {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px;
+    margin: 2px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.modal-input-alt {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px;
+    margin: 2px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.textbox {
+    width: 100%;
+    margin-bottom: 1px;
+}
+
+.modal-input-button-alt {
+    margin-top: 5px;
+    float: right;
+}
+
+table, td, th {
+    color: black;
+    
+}
+table {
+    width: 100%;
+}
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #FECD34;
+}
+th {
+    font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: bold;
+    font-weight: 600;
+    color: #198090;
+    text-align: left;
+    letter-spacing: .5px;
+}
+td {
+    font-size: 15px;
+    text-align: left;
+}
+
+tr:hover {background-color:#f5f5f5;}
+    
+

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Password Protector</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+    
+    <script src="style_scripts.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Header -->
+
+    <header class="header-container">
+        
+        <div class="primary-header container group">
+            
+          <img src="lock3.jpg" alt="Lock Logo">
+
+          <h1 class="logo">
+             Password <br> Protector
+          </h1>
+
+            <a href="index.html"><h3 class="signout">Sign Out</h3></a>
+            
+        </div>
+    </header>
+
+    <!-- Buttons -->
+
+    <section class="hero container">
+
+      <!-- ====================== Add Button and Modal ============================= -->
+        
+      <div class="button-container">
+          <button type="button" class="button col-1-3" id="myAddBtn">New Password</button>
+          
+          <!-- ======= view favorites button pending ===========
+
+          <button type="button" class="button button-view col-1-3">View Favorites</button>
+            
+
+          <button type="button" class="button col-1-3">button</button>
+          -->
+      </div>
+
+        <!-- ADD Modal -->
+        <div id="addModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="close">&times;</span>
+              <h2 class="modal-heading">Add New Account</h2>
+            </div>
+            <div class="modal-body">
+              <!-- <form class="signup-form" action="/action_page.php" method="post">   -->
+
+                Account (Nickname)<br>
+                <input class="modal-input" type="text" name="account" required id = "addAccount"><br>
+                Username<br>
+                <input class="modal-input" type="text" name="username" id = "addUsername"><br>
+                Password<br>
+                <input class="modal-input-alt" type="text" name="password" id = "addPassword"><br>
+                URL<br>
+                <input class="modal-input" type="text" name="url" id = "addUrl"><br>
+                Notes<br>
+                <textarea class="textbox" name="notes" id = "notes" maxlength="150" placeholder="Type note here..."></textarea><br>
+            
+                <input class= "checkbox" type="checkbox" checked="checked" id = "fav" name="favorite"> Add to Favorites?
+                
+                <button type="button" class="modal-input-button-alt" onclick="generatePassword();">Generate Password</button>
+             
+              <!-- </form> -->
+            </div>
+            <div class="modal-footer">
+
+                <input class="modal-input-button" type="submit" value="Submit" onclick="addPassword();">
+            </div>
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        
+        <div id="editModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="close">&times;</span>
+              <h2 class="modal-heading">Edit Account</h2>
+            </div>
+            <div class="modal-body">
+              <!-- <form class="signup-form" action="/action_page.php" method="post">   Luca / Alex -->
+
+                Account (Nickname)<br>
+                <input class="modal-input" type="text" name="account" required id = "editAccount"><br>
+                Username<br>
+                <input class="modal-input" type="text" name="username" id = "editUsername"><br>
+                Password<br>
+                <input class="modal-input-alt" type="text" name="password" id = "editPassword">
+                
+                
+                
+                URL<br>
+                <input class="modal-input" type="text" name="url" id = "editUrl"><br>
+                Notes<br>
+                <textarea class="textbox" name="notes" id = "editnotes" maxlength="150" placeholder="Type note here..."></textarea><br>
+                
+                <input class="modal-checkbox-input" type="checkbox" checked="checked" id = "editfav" name="favorite">Add to Favorites?
+                
+                <button type="button" class="modal-input-button-alt" onclick="generatePasswordEdit();">Generate Password</button>
+                
+    <!-- To Luca - put "save edit" functionality here -->
+                
+                
+
+              <!-- </form> -->
+            </div>
+            <div class="modal-footer">
+              <button class="modal-input-button" type="button" onclick ="EditSave();">Save</button>
+            </div>
+          </div>
+
+        </div>
+        
+       
+        
+         <!-- ====================== Search ============================= -->
+        
+        
+      <div class="search-container">
+        <!-- <form class="seachContent" action="/action_page.php" method="post"> -->
+            <input class="input-search" type="text" name="search" id = "search" placeholder="Search"><br>
+          
+            <button class="search-button" onclick="searchPassword();">Go</button>
+        <!-- </form>   -->
+      </div>
+
+    </section>
+
+
+
+    <!-- Table -->
+
+    <section class="row hero">
+      <div class="container">
+        <table id = "myTable">
+          <tr>
+            <th>Account</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>URL</th>
+            <th>Notes</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+
+
+    <!-- Footer -->
+
+    <footer class="footer-container">
+
+        <div class="primary-footer container group">
+
+          <!--<img src="primitiae.jpg" alt="Primitiae Logo"> -->    
+            
+          <small>&copy; Primitiae Projects</small>
+
+          <nav class="nav">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+
+        </div>
+    </footer>
+    
+       <!-- =========== Modal Script ================== --> 
+        
+        <script>
+        // Get the modals
+        var addModal = document.getElementById('addModal');
+        var editModal = document.getElementById('editModal');
+
+        // Get the button that opens the modal
+        var addBtn = document.getElementById("myAddBtn");
+        var editBtn = document.getElementsByClassName("myEditBtn");
+
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close");
+
+        // When the user clicks modal trigger buttons, show modal.
+        addBtn.onclick = function() {
+            addModal.style.display = "block";
+        }
+        
+        for (var i = 0; i < editBtn.length; i++) {
+            editBtn[i].onclick = function() {
+                editModal.style.display = "block";
+            }
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        for (var i = 0; i < span.length; i++) {
+            span[i].onclick = function() {
+                addModal.style.display = "none";
+                editModal.style.display = "none";
+            }
+        }
+       
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == addModal || event.target == editModal) {
+                addModal.style.display = "none";
+                editModal.style.display = "none";
+            }
+        }
+        </script>
+        
+      
+    <!-- 
+     =====================The rest of the Script =============================== -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+    <script type="text/javascript">
+
+    var x = document.cookie;
+    var m = x.slice(6,8);
+    console.log(m);
+    var userId = m;    
+
+    // var userId = 16;
+    var id = 0;
+    var someJuice = 0;
+
+
+   function EditSave()
+  {
+    var account = document.getElementById("editAccount").value;
+    // gotta be a string
+    var username = document.getElementById("editUsername").value;
+    // gotta be a string
+    var password = document.getElementById("editPassword").value;
+    // gotta be a int either 0 or 1 you could do this with a check box if you want
+    // var favorite = document.getElementById("addFavorite").value;
+    // gotta be a string
+    var url = document.getElementById("editUrl").value;
+    // gotta be a string
+    var iconUrl = document.getElementById("editnotes").value;
+    // gotta be a int is here for debugging only later will be handled with cookies
+    // var userId = document.getElementById("adduserId").value;
+    var favorite = 0;
+    // var iconUrl = "what";
+    var favorite = 0;
+
+    var seed = "this is a seed";
+    var encrypted = CryptoJS.AES.encrypt(password, seed);
+
+
+    if(document.getElementById("editfav").checked)
+    {
+      favorite = 1;
+    }
+    else
+      favorite = 0;
+
+    var i = someJuice.parentNode.parentNode.rowIndex;
+    var x = document.getElementById("myTable").rows[i].cells;
+
+    x[0].innerHTML = account;
+    x[1].innerHTML = username;
+    x[2].innerHTML = password;
+    x[3].innerHTML = url;
+    x[4].innerHTML = iconUrl;
+
+    editModal.style.display = "none";
+
+    var jsonPayload = '{"account" : "'+account+'" ,"username" : "'+username+'","password" : "'+encrypted+'","favorite" : "'+favorite+'", "url" :  "'+url+'","iconUrl" : "'+iconUrl+'" ,"userId" : "' +userId+ '", "id": "'+id+'"}';
+    
+  console.log(jsonPayload);
+
+  var url = "http://passwords.aisoftworks.net/editPassword.php";
+
+
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  try
+  {
+    xhr.onreadystatechange = function()
+    {
+      if (this.readyState == 4 && this.status == 200)
+      {
+          // alert("password has been edited");
+
+      }
+    };
+    xhr.send(jsonPayload);
+
+  }
+  catch(err)
+  {
+      alert(err.message);
+  }
+
+
+// }
+
+    }
+
+    function Edit(r)
+    {
+        someJuice = r;
+        var i = r.parentNode.parentNode.rowIndex;
+        var x = document.getElementById("myTable").rows[i].cells;
+
+        document.getElementById("editAccount").value = x[0].innerHTML;
+        document.getElementById("editUsername").value = x[1].innerHTML;
+        document.getElementById("editPassword").value = x[2].innerHTML;
+        document.getElementById("editUrl").value = x[3].innerHTML;
+        document.getElementById("editnotes").innerHTML = x[4].innerHTML;
+
+        editModal.style.display = "block";
+
+
+        id = r.parentNode.parentNode.id; 
+
+
+    }
+    
+    function Delete(r)
+    {
+  
+             // console.log(r.parentNode.parentNode.id);
+
+        var url = "http://passwords.aisoftworks.net/deletePassword.php";
+        // var yourSelect = document.getElementById( "passwordListlil" );
+        //var postId = yourSelect.options[ yourSelect.selectedIndex ].value;
+        var id = r.parentNode.parentNode.id;
+        var json = '{"id": "' + id + '", "userId" : "' + userId + '"}';
+        //var json = '{"id" : "' + postId + '", "uderId" : "' + userId + '"}';
+        //yourSelect.options[ yourSelect.selectedIndex ].remove();
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try
+        {
+            xhr.send(json);
+            // console.log(xhr.responseText);
+            var jsonObject = JSON.parse( xhr.responseText );
+            // console.log(jsonObject);
+        }
+        catch(err)
+        {
+            alert(err.message);
+        }
+      
+
+
+       var i = r.parentNode.parentNode.rowIndex;
+       document.getElementById("myTable").deleteRow(i);
+    }
+
+    function searchPassword()
+    {
+        //change url
+        var srch = document.getElementById("search").value;
+        // document.getElementById("searchResult").innerHTML = "";
+
+        // var passwordmist = document.getElementById("passwordListlil");
+        //var json = '{"account": "edit", "userId" : "16"}';
+        var json = '{"account": "' + srch + '", "userId" : "' + userId + '"}';
+
+        var url = "http://passwords.aisoftworks.net/searchPasswords.php";
+
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open("POST", url, true);
+        xhr2.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try
+        {
+            xhr2.onreadystatechange = function()
+            {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    // document.getElementById("searchResult").innerHTML = "Password(s) has been retrieved";
+                    // console.log(xhr2.responseText);
+                    var jsonObject = JSON.parse( xhr2.responseText );
+
+                    // console.log(jsonObject);
+                    var i;
+
+                    if(jsonObject.results.length < 1)
+                    {
+                      alert("cannot find Password");
+                        // document.getElementById("searchResult").innerHTML = "Cannot find Password(s)";
+                    }
+
+                    for (i=0; i<jsonObject.results.length; i++ )
+                    {
+
+                        // So here is me grabbing the table and inserting to the top
+                        // row 
+                        var table = document.getElementById("myTable");
+                        var row = table.insertRow(1);
+                        row.id = jsonObject.results[i].id;
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        var cell6 = row.insertCell(5);
+                        var cell7 = row.insertCell(6);
+
+                        cell1.innerHTML = jsonObject.results[i].account;
+                        cell2.innerHTML = jsonObject.results[i].username;
+                        cell3.innerHTML = jsonObject.results[i].password;
+                        cell4.innerHTML = jsonObject.results[i].url;
+                        cell5.innerHTML = jsonObject.results[i].iconUrl;
+                        
+
+                        var btn1 = document.createElement('input');
+                        btn1.type = "button";
+                        btn1.className = "btn";
+                        btn1.value = "Edit";
+                        var func1 = "Edit(this);"
+                        btn1.setAttribute("onclick", func1);
+                        btn1.setAttribute("href", "javascript:;");
+
+                        cell6.appendChild(btn1);
+                        var func = "Delete(this);"
+                        var btn2 = document.createElement('input');
+                        btn2.type = "button";
+                        btn2.className = "btn";
+                        btn2.value = "Delete";
+                        btn2.setAttribute("onclick", func);
+                        btn2.setAttribute("href", "javascript:;");
+                        cell7.appendChild(btn2);
+
+
+
+
+                        console.log(jsonObject.results[i]);
+                        
+                        
+                    }
+                    if(jsonObject.error.length > 2)
+                    {
+                        alert(jsonObject.error)
+                    }
+                    
+                    
+                    //console.log(jsonObject.results);
+    
+                }
+            };
+            xhr2.send(json);
+            
+            
+
+        }
+        catch(err)
+        {
+            document.getElementById("searchResult").innerHTML = err.message;
+        }
+        
+        
+    }
+    function generatePasswordEdit() {
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+      document.getElementById("editPassword").value = retVal;
+    }
+    function generatePassword() {
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+      document.getElementById("addPassword").value = retVal;
+    }
+
+
+
+    function addPassword()
+    {
+    //   alert("what");
+
+    // gotta be a string
+    var account = document.getElementById("addAccount").value;
+    // gotta be a string
+    var username = document.getElementById("addUsername").value;
+    // gotta be a string
+    var password = document.getElementById("addPassword").value;
+    // gotta be a int either 0 or 1 you could do this with a check box if you want
+    // var favorite = document.getElementById("addFavorite").value;
+    // gotta be a string
+    var url = document.getElementById("addUrl").value;
+    // gotta be a string
+    var iconUrl = document.getElementById("notes").value;
+    // gotta be a int is here for debugging only later will be handled with cookies
+    // var userId = document.getElementById("adduserId").value;
+    var favorite = 0;
+    // var iconUrl = "what";
+    var favorite = 0;
+    if(document.getElementById("fav").checked)
+    {
+      favorite = 1;
+    }
+    else
+      favorite = 0;
+
+
+    var seed = "this is a seed";
+    var encrypted = CryptoJS.AES.encrypt(password, seed);
+
+
+          var  jsonPayload = '{"account" : "'+account+'" ,"username" : "'+username+'","password" : "'+encrypted+'","favorite" : "'+favorite+'", "url" :  "'+url+'","iconUrl" : "'+iconUrl+'","userId" : "'+userId+'"}';
+    
+  console.log(jsonPayload);
+
+  var url = "http://passwords.aisoftworks.net/addPassword.php";
+
+    addModal.style.display = "none";
+
+
+  // alert("luca dont forget to put the userId code in here");
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  try
+  {
+    xhr.onreadystatechange = function()
+    {
+      if (this.readyState == 4 && this.status == 200)
+      {
+        //   alert("password has been added");
+
+      }
+    };
+    xhr.send(jsonPayload);
+
+  }
+  catch(err)
+  {
+      alert(err.message);
+  }
+
+}
+    </script>    
+  </body>
+</html>

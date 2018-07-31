@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+  </head>
+
+  <body>
+
+    <!-- Header -->
+
+     <header class="header-container">
+        
+        <div class="primary-header container group">
+            
+          <img src="lock3.jpg" alt="Lock Logo">
+
+          <h1 class="logo">
+             Password <br> Protector
+          </h1>
+            
+        </div>
+    </header>
+
+    <!-- Signup -->
+
+    <section class="row-trans">
+      <div class="signup-container container group">
+
+        <h1>Sign Up</h1>
+
+        <div class="signup-form-container">
+            <!-- <form class="signup-form" action="/action_page.php" method="post"> Luca / Alex -->
+
+                First Name<br>
+                <input class="signup-input" type="text" name="firstname" id = "firstName"><br>
+                Last Name<br>
+                <input class="signup-input" type="text" name="lastname" id = "lastName"><br>
+                Email<br>
+                <input class="signup-input" type="email" name="email" id = "Email"><br>
+                Username<br>
+                <input class="signup-input" type="text" name="username" id = "signUpName"><br>
+                Password<br>
+                <input class="signup-input" type="password" name="password" id = "signUpPassword"><br>
+                Confirm Password<br>
+                <input class="signup-input" type="password" name="confirm" id = "confirm"><br>
+
+                <input class="signup-button" type="submit" value="Submit" onclick = "doSignUp();">
+
+            <!-- </form> -->
+        </div>
+      </div>
+    </section>
+    
+
+    <!-- Footer -->
+
+    <footer class="footer-container">
+
+        <div class="primary-footer container group">
+
+          <!--<img src="primitiae.jpg" alt="Primitiae Logo"> -->    
+            
+          <small>&copy; Primitiae Projects</small>
+
+          <nav class="nav">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+
+        </div>
+    </footer>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+    <script type="text/javascript">
+
+      function doSignUp()
+    {
+        var signurl = "http://passwords.aisoftworks.net/signUp.php";
+        var signusername = document.getElementById('signUpName').value;
+        var signpassword = document.getElementById('signUpPassword').value;
+        var signfirstName = document.getElementById('firstName').value;
+        var signlastName = document.getElementById('lastName').value;
+        document.getElementById('signUpName').value = "";
+        document.getElementById('signUpPassword').value = "";
+        document.getElementById('firstName').value = "";
+        document.getElementById('lastName').value = "";
+        document.getElementById('Email').value = "";
+        document.getElementById('confirm').value = "";
+
+
+
+        var seed = "this is a seed";
+        var encrypted = CryptoJS.AES.encrypt(signpassword, seed);
+
+
+
+        var json = '{"login" : "' + signusername + '","firstName" : "' + signfirstName + '","lastName" : "' + signlastName + '", "password" : "' + encrypted + '"}';
+        console.log(json);
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("POST", signurl, false);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+      try
+      {
+        xhr.send(json);
+
+        var jsonObject = JSON.parse( xhr.responseText );
+        userId = jsonObject.id;
+
+
+        if( userId < 1 )
+        {
+          alert("User/Password combination incorrect");
+          console.log("User/Password combination incorrect");
+          return;
+        }
+        else
+        {
+
+            document.cookie = "Login =" + userId;
+            window.location.href="dashboard.html";
+
+            
+                  // hideOrShow("stuff",false);
+                  //     hideOrShow("addContact",true);
+                  //     hideOrShow("contactList",true);
+                  //     hideOrShow("addContactResult",true);
+                  //     hideOrShow("loggedIn",true);
+
+        }
+
+      }
+      catch(err)
+      {
+          alert(err.message);
+      }
+
+
+    }
+
+    </script>
+  </body>
+</html>

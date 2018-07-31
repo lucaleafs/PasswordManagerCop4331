@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Password Protector</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+  </head>
+
+  <body>
+
+    <!-- Header -->
+
+    <header class="header-container">
+        
+        <div class="primary-header container group">
+            
+          <img src="lock3.jpg" alt="Lock Logo">
+
+          <h1 class="logo">
+             Password <br> Protector
+          </h1>
+
+          <h3 class="tagline">Already a member?</h3>
+
+          <div class="login-container">
+            <!-- <form class="login-form" action="/action_page.php">   -->
+                <input class="input-login" type="text" name="username" placeholder="Username" id = "loginName"><br>
+                <input class="input-login" type="password" name="password" placeholder="Password" id = "loginPassword"><br>
+                <input class="login-button" type="submit" value="Login" onclick = "doLogin();">
+            <!-- </form> -->
+          </div>
+            
+        </div>
+    </header>
+
+    <!-- Hero -->
+
+    <section class="hero container">
+
+      <h2>Dedicated to the Craft of Password Management</h2>
+
+      <p>Keep all of your passwords secure in one place and access them anywhere. <br> Never worry about remembering a password again!</p>
+
+      <a class="btn btn-alt" href="signup.html">Sign Up Now</a>
+
+    </section>
+
+    <!-- Teasers -->
+
+    <section class="row">
+      <div class="grid">
+
+        <!-- Security -->
+
+        <section class="teaser col-1-3">
+          
+            <h5>Security</h5>
+            <h3>World-Class Security Sytems</h3>
+          
+            <p>Our cutting-edge security systems keeps your information safe.</p>
+        </section><!--
+
+        Storage
+
+        --><section class="teaser col-1-3">
+             
+            <h5>Storage</h5>
+            <h3>Innovative Cloud Technology</h3>
+          
+            <p>Enjoy fast and reliable access to all of your information.  Anytime.  Anywhere.</p>
+        </section><!--
+
+        Freedom
+
+        --><section class="teaser col-1-3">
+          
+            <h5>Freedom</h5>
+            <h3>Peace of Mind</h3>
+        
+            <p>Enjoy the freedom of never having to remember your passwords again.</p>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="footer-container">
+
+        <div class="primary-footer container group">
+
+          <!--<img src="primitiae.jpg" alt="Primitiae Logo"> -->    
+            
+          <small>&copy; Primitiae Projects</small>
+
+          <nav class="nav">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+
+        </div>
+    </footer>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+    <script type="text/javascript">
+
+
+          var x = document.cookie;
+        var m = x.slice(6,8);
+        console.log(m);
+        var userId = m;
+
+   function doLogin()
+    {
+        var url = "http://passwords.aisoftworks.net/Login.php";
+        var username = document.getElementById('loginName').value;
+        var password = document.getElementById('loginPassword').value;
+
+        document.getElementById('loginName').value = "";
+        document.getElementById('loginPassword').value = "";
+
+        var seed = "this is a seed";
+        var encrypted = CryptoJS.AES.encrypt(password, seed);
+
+        var json = '{"login" : "' + username + '", "password" : "' + encrypted + '"}';
+
+        console.log(json);
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+      try
+      {
+        xhr.send(json);
+
+            console.log(xhr.responseText);
+        var jsonObject = JSON.parse( xhr.responseText );
+        userId = jsonObject.id;
+
+            console.log(jsonObject);
+
+        if( userId < 1 )
+        {
+          alert("User/Password combination incorrect");
+          console.log("User/Password combination incorrect");
+          return;
+        }
+        else
+        {
+            document.cookie = "Login =" + userId;
+            window.location.href="dashboard.html";
+
+
+        }
+
+      }
+      catch(err)
+      {
+          alert(err.message);
+      }
+
+
+    }
+        </script>
+    </script>
+        
+  </body>
+</html>
